@@ -43,10 +43,9 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boole
 }
 
 private fun doBefore() {
-    TraceDroid.deleteStacktraceFiles()
+    TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
     setFailureHandler(SpooningFailureHandler(InstrumentationRegistry.getInstrumentation()))
 }
-
 
 fun doAfter(activity: Activity) {
     activity.runOnUiThread { activity.window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD) }
