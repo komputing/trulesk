@@ -6,6 +6,7 @@ import android.support.test.espresso.Espresso.setFailureHandler
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.rule.ActivityTestRule
 import android.view.WindowManager
+import com.jraska.falcon.FalconSpoon
 import org.ligi.tracedroid.TraceDroid
 
 class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true)
@@ -21,6 +22,7 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
         doAfter(activity)
     }
 
+    fun screenShot(tag: String) = FalconSpoon.screenshot(this.activity, tag)
 }
 
 class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true)
@@ -35,6 +37,8 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boole
         super.afterActivityLaunched()
         doAfter(activity)
     }
+
+    fun screenShot(tag: String) = FalconSpoon.screenshot(this.activity, tag)
 
 }
 
