@@ -10,6 +10,7 @@ version libVersionName
 
 repositories {
     jcenter()
+
 }
 
 dependencies {
@@ -17,6 +18,8 @@ dependencies {
 
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.kotlin:kotlin-runtime:$kotlin_version"
+
+    compile 'org.ligi:tracedroid:1.4'
 
     compile('com.android.support.test.espresso:espresso-intents:2.2.2')
     compile 'com.jraska:falcon-spoon-compat:1.0.3'
