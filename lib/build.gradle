@@ -37,4 +37,8 @@ android {
         versionName libVersionName
     }
 
+    lintOptions {
+        warning "InvalidPackage"
+    }
+
 }
