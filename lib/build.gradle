@@ -3,8 +3,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'android-maven'
 
-def libVersionName = '0.5'
-def libVersionCode = 5
+def libVersionName = '0.6'
+def libVersionCode = 6
 
 version libVersionName
 
