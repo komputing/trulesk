@@ -22,7 +22,8 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = FalconSpoon.screenshot(this.activity, tag)
+    fun screenShot(tag: String) = screenshot(tag)
+
 }
 
 class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true)
@@ -38,8 +39,18 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boole
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = FalconSpoon.screenshot(this.activity, tag)
+    fun screenShot(tag: String) = screenshot(tag)
+}
 
+
+private fun ActivityTestRule<out Activity>.screenshot(tag: String) {
+    try {
+        FalconSpoon.screenshot(this.activity, tag)
+    } catch (e: Exception) {
+        // OK we could not make a screenshot - no big deal
+        // do not fail the build - might just be a missing permission
+        e.printStackTrace()
+    }
 }
 
 private fun doBefore() {
