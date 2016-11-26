@@ -9,12 +9,12 @@ import android.view.WindowManager
 import com.jraska.falcon.FalconSpoon
 import org.ligi.tracedroid.TraceDroid
 
-class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true)
+class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
     : ActivityTestRule<T>(activityClass, true, autoLaunch) {
 
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
-        doBefore()
+        doBefore(before)
     }
 
     override fun afterActivityLaunched() {
@@ -26,12 +26,12 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
 
 }
 
-class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true)
+class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
     : IntentsTestRule<T>(activityClass, true, autoLaunch) {
 
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
-        doBefore()
+        doBefore(before)
     }
 
     override fun afterActivityLaunched() {
@@ -53,9 +53,10 @@ private fun ActivityTestRule<out Activity>.screenshot(tag: String) {
     }
 }
 
-private fun doBefore() {
+private fun doBefore(f: () -> Unit) {
     TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
     setFailureHandler(SpooningFailureHandler(InstrumentationRegistry.getInstrumentation()))
+    f.invoke()
 }
 
 fun doAfter(activity: Activity) {
