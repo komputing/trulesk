@@ -23,7 +23,7 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
     }
 
     fun screenShot(tag: String) = screenshot(tag)
-
+    fun launchActivity() = launchActivity(null)
 }
 
 class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
@@ -40,6 +40,7 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boole
     }
 
     fun screenShot(tag: String) = screenshot(tag)
+    fun launchActivity() = launchActivity(null)
 }
 
 
