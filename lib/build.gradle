@@ -24,6 +24,7 @@ dependencies {
     compile('com.android.support.test.espresso:espresso-intents:2.2.2')
     compile 'com.jraska:falcon-spoon-compat:1.0.3'
 
+    compile 'com.linkedin.testbutler:test-butler-library:1.1.0'
 }
 
 android {
