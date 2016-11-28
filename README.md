@@ -10,9 +10,11 @@ I had some code that was the same over several projects - this library is create
 
 These are test-rules that do the following:
  - Install a SpooningFailureHandler ( Making screenshots with falcon-spoon - so you easily see in the report when the test failed because of some system dialog)
- - set the FLAG_TURN_SCREEN_ON or FLAG_DISMISS_KEYGUARD
- - provide screenshot facade as extension function ( I was switching from native spoon to falcon-spoon once - now I want a facade to change it more easily )
+ - Set the FLAG_TURN_SCREEN_ON or FLAG_DISMISS_KEYGUARD
+ - Provide screenshot facade as extension function ( I was switching from native spoon to falcon-spoon once - now I want a facade to change it more easily )
  - Delete TraceDroid stacktrace files
+ - Base for custom Runner which lets you replace the Application class easily
+ - Activate and Deactivate TestButtler
  
 These functions come from one ActivityTestRule and one IntentTestRule
 
