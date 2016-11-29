@@ -18,6 +18,28 @@ These are test-rules that do the following:
  
 These functions come from one ActivityTestRule and one IntentTestRule
 
+Example
+=======
+
+A very simple usage:
+
+```kotlin
+class TheHelpActivity {
+
+    @get:Rule
+    val rule = TruleskActivityRule(HelpActivity::class.java)
+
+    @Test
+    fun test_version_is_shown() {
+        onView(withText("v" + BuildConfig.VERSION_NAME)).check(matches(isDisplayed()))
+        
+        rule.screenShot("help")
+    }
+}
+```
+
+Find more in [PassAndroid](https://github.com/ligi/PassAndroid) and [GobanDroid](https://github.com/ligi/gobandroid)
+
 Where?
 ======
 
