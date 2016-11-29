@@ -16,6 +16,7 @@ abstract class AppReplacingRunnerBase : AndroidJUnitRunner() {
 
     override fun onStart() {
         TestButler.setup(InstrumentationRegistry.getTargetContext())
+        TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getTargetContext())
         super.onStart()
     }
 
