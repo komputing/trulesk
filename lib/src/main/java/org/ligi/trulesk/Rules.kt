@@ -7,6 +7,7 @@ import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.rule.ActivityTestRule
 import android.view.WindowManager
 import com.jraska.falcon.FalconSpoon
+import com.linkedin.android.testbutler.TestButler
 import org.ligi.tracedroid.TraceDroid
 
 class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
@@ -55,6 +56,8 @@ private fun ActivityTestRule<out Activity>.screenshot(tag: String) {
 }
 
 private fun doBefore(f: () -> Unit) {
+    TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getTargetContext())
+
     TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
     setFailureHandler(SpooningFailureHandler(InstrumentationRegistry.getInstrumentation()))
     f.invoke()
