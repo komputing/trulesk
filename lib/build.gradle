@@ -10,7 +10,6 @@ version libVersionName
 
 repositories {
     jcenter()
-    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.1' }
     maven { url 'https://jitpack.io' }
 }
 
