@@ -5,7 +5,8 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.espresso.Espresso.setFailureHandler
 import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.rule.ActivityTestRule
-import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+import android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
 import com.jraska.falcon.FalconSpoon
 import com.linkedin.android.testbutler.TestButler
 import org.ligi.tracedroid.TraceDroid
@@ -64,5 +65,7 @@ private fun doBefore(f: () -> Unit) {
 }
 
 fun doAfter(activity: Activity) {
-    activity.runOnUiThread { activity.window.addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD) }
+    activity.runOnUiThread {
+        activity.window.addFlags(FLAG_TURN_SCREEN_ON or FLAG_DISMISS_KEYGUARD)
+    }
 }
