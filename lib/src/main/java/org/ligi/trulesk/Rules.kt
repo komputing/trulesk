@@ -64,7 +64,7 @@ private fun doBefore(f: () -> Unit) {
     f.invoke()
 }
 
-fun doAfter(activity: Activity) {
+private fun doAfter(activity: Activity) {
     activity.runOnUiThread {
         activity.window.addFlags(FLAG_TURN_SCREEN_ON or FLAG_DISMISS_KEYGUARD)
     }
