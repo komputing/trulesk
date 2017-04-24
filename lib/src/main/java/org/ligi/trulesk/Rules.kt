@@ -56,12 +56,12 @@ private fun ActivityTestRule<out Activity>.screenshot(tag: String) {
     }
 }
 
-private fun doBefore(f: () -> Unit) {
+private fun doBefore(additionalWork: () -> Unit) {
     TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getTargetContext())
 
     TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
     setFailureHandler(SpooningFailureHandler(InstrumentationRegistry.getInstrumentation()))
-    f.invoke()
+    additionalWork.invoke()
 }
 
 private fun doAfter(activity: Activity) {
