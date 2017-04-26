@@ -10,12 +10,9 @@ import android.support.test.espresso.action.ViewActions.click
 import android.support.test.espresso.matcher.ViewMatchers.withId
 import android.support.test.espresso.matcher.ViewMatchers.withText
 
-fun invokeMenu(@IdRes menuId: Int, @StringRes menuStringRes: Int) {
-
-    try {
-        onView(withId(menuId)).perform(click())
-    } catch (nmv: NoMatchingViewException) {
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().targetContext)
-        onView(withText(menuStringRes)).perform(click())
-    }
+fun invokeMenu(@IdRes menuId: Int, @StringRes menuStringRes: Int) = try {
+    onView(withId(menuId)).perform(click())
+} catch (nmv: NoMatchingViewException) {
+    openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getInstrumentation().targetContext)
+    onView(withText(menuStringRes)).perform(click())
 }
