@@ -7,7 +7,6 @@ import android.support.test.espresso.base.DefaultFailureHandler
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
 import android.support.test.runner.lifecycle.Stage
 import android.view.View
-import com.jraska.falcon.FalconSpoon
 import org.hamcrest.Matcher
 import java.util.concurrent.atomic.AtomicReference
 
@@ -18,7 +17,6 @@ class SpooningFailureHandler(private val instrumentation: Instrumentation) : Fai
 
     override fun handle(error: Throwable, viewMatcher: Matcher<View>) {
         try {
-            FalconSpoon.screenshot(currentActivity(), "error_falcon")
         } catch (throwable: Throwable) {
             throwable.printStackTrace()
         }

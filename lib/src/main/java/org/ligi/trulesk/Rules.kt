@@ -7,12 +7,23 @@ import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.rule.ActivityTestRule
 import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 import android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-import com.jraska.falcon.FalconSpoon
+import com.jraska.falcon.Falcon
 import com.linkedin.android.testbutler.TestButler
+import com.squareup.spoon.SpoonRule
+import org.junit.runner.Description
+import org.junit.runners.model.Statement
 import org.ligi.tracedroid.TraceDroid
+
 
 class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
     : ActivityTestRule<T>(activityClass, true, autoLaunch) {
+
+    private val spoonRule = SpoonRule()
+
+    override fun apply(base: Statement?, description: Description?): Statement {
+        spoonRule.apply(base, description)
+        return super.apply(base, description)
+    }
 
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
@@ -24,13 +35,20 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = screenshot(tag)
+    fun screenShot(tag: String) = screenshot(spoonRule, tag)
     fun launchActivity() = launchActivity(null)
 }
 
 class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
     : IntentsTestRule<T>(activityClass, true, autoLaunch) {
 
+    private val spoonRule = SpoonRule()
+
+    override fun apply(base: Statement?, description: Description?): Statement {
+        spoonRule.apply(base, description)
+        return super.apply(base, description)
+    }
+
     override fun beforeActivityLaunched() {
         super.beforeActivityLaunched()
         doBefore(before)
@@ -41,14 +59,16 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boole
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = screenshot(tag)
+    fun screenShot(tag: String) = screenshot(spoonRule, tag)
     fun launchActivity() = launchActivity(null)
 }
 
 
-private fun ActivityTestRule<out Activity>.screenshot(tag: String) {
+private fun ActivityTestRule<out Activity>.screenshot(spoonRule: SpoonRule, tag: String) {
+
     try {
-        FalconSpoon.screenshot(this.activity, tag)
+        val screenshot = spoonRule.screenshot(activity, tag)
+        Falcon.takeScreenshot(activity, screenshot)
     } catch (e: Exception) {
         // OK we could not make a screenshot - no big deal
         // do not fail the build - might just be a missing permission
