@@ -15,7 +15,9 @@ import org.junit.runners.model.Statement
 import org.ligi.tracedroid.TraceDroid
 
 
-class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
+class TruleskActivityRule<T : Activity>(activityClass: Class<T>,
+                                        autoLaunch: Boolean = true,
+                                        private val before: () -> Unit = {})
     : ActivityTestRule<T>(activityClass, true, autoLaunch) {
 
     private val spoonRule = SpoonRule()
@@ -39,7 +41,9 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boo
     fun launchActivity() = launchActivity(null)
 }
 
-class TruleskIntentRule<T : Activity>(activityClass: Class<T>, autoLaunch: Boolean = true, val before: () -> Unit = {})
+class TruleskIntentRule<T : Activity>(activityClass: Class<T>,
+                                      autoLaunch: Boolean = true,
+                                      private val before: () -> Unit = {})
     : IntentsTestRule<T>(activityClass, true, autoLaunch) {
 
     private val spoonRule = SpoonRule()
