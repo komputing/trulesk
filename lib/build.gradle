@@ -12,13 +12,10 @@ repositories {
     jcenter()
     maven { url 'https://maven.google.com' }
     maven { url 'https://jitpack.io' }
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots" } // For Spoon snapshot, until 2.0.0 is released
 }
 
 dependencies {
     compile 'com.jraska:falcon:2.0.1'
-    compile "com.jraska:falcon-spoon-compat:2.0.1"
-    compile "com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT"
 
     compile "com.android.support:support-v4:$support_version"
 

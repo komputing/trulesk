@@ -7,9 +7,7 @@ import android.support.test.espresso.intent.rule.IntentsTestRule
 import android.support.test.rule.ActivityTestRule
 import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 import android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
-import com.jraska.falcon.Falcon
 import com.linkedin.android.testbutler.TestButler
-import com.squareup.spoon.SpoonRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
 import org.ligi.tracedroid.TraceDroid
@@ -20,10 +18,11 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>,
                                         private val before: () -> Unit = {})
     : ActivityTestRule<T>(activityClass, true, autoLaunch) {
 
-    private val spoonRule = SpoonRule()
+    lateinit var description: Description
 
-    override fun apply(base: Statement?, description: Description?): Statement {
-        spoonRule.apply(base, description)
+    override fun apply(base: Statement?, description: Description): Statement {
+        this.description = description
+        doOnApply(description)
         return super.apply(base, description)
     }
 
@@ -37,7 +36,7 @@ class TruleskActivityRule<T : Activity>(activityClass: Class<T>,
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = screenshot(spoonRule, tag)
+    fun screenShot(tag: String) = screenshot(description, tag)
     fun launchActivity() = launchActivity(null)
 }
 
@@ -46,10 +45,11 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>,
                                       private val before: () -> Unit = {})
     : IntentsTestRule<T>(activityClass, true, autoLaunch) {
 
-    private val spoonRule = SpoonRule()
+    lateinit var description: Description
 
-    override fun apply(base: Statement?, description: Description?): Statement {
-        spoonRule.apply(base, description)
+    override fun apply(base: Statement?, description: Description): Statement {
+        this.description = description
+        doOnApply(description)
         return super.apply(base, description)
     }
 
@@ -63,28 +63,24 @@ class TruleskIntentRule<T : Activity>(activityClass: Class<T>,
         doAfter(activity)
     }
 
-    fun screenShot(tag: String) = screenshot(spoonRule, tag)
+    fun screenShot(tag: String) = screenshot(description, tag)
     fun launchActivity() = launchActivity(null)
 }
 
 
-private fun ActivityTestRule<out Activity>.screenshot(spoonRule: SpoonRule, tag: String) {
+private fun ActivityTestRule<out Activity>.screenshot(description: Description, tag: String) = makeScreenshot(activity, description, tag)
 
-    try {
-        val screenshot = spoonRule.screenshot(activity, tag)
-        Falcon.takeScreenshot(activity, screenshot)
-    } catch (e: Exception) {
-        // OK we could not make a screenshot - no big deal
-        // do not fail the build - might just be a missing permission
-        e.printStackTrace()
-    }
+private fun doOnApply( description: Description) {
+    val newFailureHandler = ScreenshotFailureHandler(InstrumentationRegistry.getInstrumentation(), description)
+    setFailureHandler(newFailureHandler)
 }
 
 private fun doBefore(additionalWork: () -> Unit) {
+
     TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getTargetContext())
 
     TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
-    setFailureHandler(SpooningFailureHandler(InstrumentationRegistry.getInstrumentation()))
+
     additionalWork.invoke()
 }
 
