@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'android-maven'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'org.jetbrains.dokka-android'
 
 def libVersionName = '0.24'
 def libVersionCode = 24
@@ -43,24 +44,24 @@ android {
         warning "InvalidPackage"
     }
 
-    task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.java.source
-        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    dokka {
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/documentation"
     }
 
-    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    task dokkaJar(type: Jar, dependsOn: dokka) {
         classifier = 'javadoc'
-        from androidJavadocs.destinationDir
+        from dokka.outputDirectory
     }
 
-    task androidSourcesJar(type: Jar) {
+    task sourcesJar(type: Jar) {
         classifier = 'sources'
         from android.sourceSets.main.java.source
     }
 
     artifacts {
-        archives androidSourcesJar
-        archives androidJavadocsJar
+        archives dokkaJar
+        archives sourcesJar
     }
 
 }
