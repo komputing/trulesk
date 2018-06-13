@@ -3,8 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'android-maven'
 apply plugin: 'com.github.ben-manes.versions'
 
-def libVersionName = '0.23'
-def libVersionCode = 23
+def libVersionName = '0.24'
+def libVersionCode = 24
 
 version libVersionName
 
