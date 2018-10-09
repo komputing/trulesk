@@ -30,12 +30,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.3"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode libVersionCode
         versionName libVersionName
     }
