@@ -18,16 +18,19 @@ class ScreenshotFailureHandler(private val instrumentation: Instrumentation,
     private val delegate by lazy { DefaultFailureHandler(instrumentation.targetContext) }
 
     override fun handle(error: Throwable, viewMatcher: Matcher<View>) {
-        makeScreenshot(currentActivity(), description, "error")
+        currentActivity()?.let { currentActivity ->
+            makeScreenshot(currentActivity, description, "error")
+        }
+
         delegate.handle(error, viewMatcher)
     }
 
-    private fun currentActivity(): Activity {
+    private fun currentActivity(): Activity? {
         instrumentation.waitForIdleSync()
-        val activity = AtomicReference<Activity>()
+        val activity = AtomicReference<Activity?>()
         instrumentation.runOnMainSync {
             val activities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED)
-            activity.set(activities.first())
+            activity.set(activities.firstOrNull())
         }
         return activity.get()
     }
