@@ -4,8 +4,8 @@ apply plugin: 'android-maven'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'org.jetbrains.dokka-android'
 
-def libVersionName = '0.26'
-def libVersionCode = 26
+def libVersionName = '0.27'
+def libVersionCode = 27
 
 version libVersionName
 
