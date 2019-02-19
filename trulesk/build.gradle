@@ -16,17 +16,17 @@ repositories {
 }
 
 dependencies {
-    compile 'com.jraska:falcon:2.1.1'
+    implementation 'com.jraska:falcon:2.1.1'
 
-    compile "com.android.support:support-v4:$support_version"
+    implementation "com.android.support:support-v4:$support_version"
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    compile "com.github.ligi:tracedroid:1.4"
+    implementation "com.github.ligi:tracedroid:1.4"
 
-    compile "com.android.support.test.espresso:espresso-intents:3.0.2"
+    implementation "com.android.support.test.espresso:espresso-intents:3.0.2"
 
-    compile "com.linkedin.testbutler:test-butler-library:1.4.0"
+    implementation "com.linkedin.testbutler:test-butler-library:1.4.0"
 }
 
 android {
