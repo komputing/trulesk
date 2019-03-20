@@ -1,10 +1,10 @@
 package org.ligi.trulesk
 
 import android.app.Activity
-import android.support.test.InstrumentationRegistry
-import android.support.test.espresso.Espresso.setFailureHandler
-import android.support.test.espresso.intent.rule.IntentsTestRule
-import android.support.test.rule.ActivityTestRule
+import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.espresso.Espresso.setFailureHandler
+import androidx.test.espresso.intent.rule.IntentsTestRule
+import androidx.test.rule.ActivityTestRule
 import android.view.WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
 import android.view.WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
 import com.linkedin.android.testbutler.TestButler
@@ -77,7 +77,7 @@ private fun doOnApply( description: Description) {
 
 private fun doBefore(additionalWork: () -> Unit) {
 
-    TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getTargetContext())
+    TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getInstrumentation().targetContext)
 
     TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
 

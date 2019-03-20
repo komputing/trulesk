@@ -2,10 +2,10 @@ package org.ligi.trulesk
 
 import android.app.Activity
 import android.app.Instrumentation
-import android.support.test.espresso.FailureHandler
-import android.support.test.espresso.base.DefaultFailureHandler
-import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
-import android.support.test.runner.lifecycle.Stage
+import androidx.test.espresso.FailureHandler
+import androidx.test.espresso.base.DefaultFailureHandler
+import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry
+import androidx.test.runner.lifecycle.Stage
 import android.view.View
 import org.hamcrest.Matcher
 import org.junit.runner.Description
