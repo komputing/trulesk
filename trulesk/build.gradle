@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'android-maven'
 apply plugin: 'org.jetbrains.dokka-android'
 
 def libVersionName = '0.28'
