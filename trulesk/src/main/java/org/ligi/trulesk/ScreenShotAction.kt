@@ -43,7 +43,7 @@ private fun obtainDirectory(context: Context, description: Description): File {
 
 private fun createDir(dir: File) {
     val parent = dir.parentFile
-    if (!parent.exists()) {
+    if (parent?.exists() == false) {
         createDir(parent)
     }
     if (!dir.exists() && !dir.mkdirs()) {
