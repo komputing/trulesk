@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Context.MODE_WORLD_READABLE
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.LOLLIPOP
-import android.os.Environment.getExternalStorageDirectory
+import android.os.Environment.DIRECTORY_PICTURES
 import com.jraska.falcon.Falcon
 import org.junit.runner.Description
 import java.io.File
@@ -29,7 +29,7 @@ private fun obtainDirectory(context: Context, description: Description): File {
     val directoryName = "spoon-screenshots"
     val directory = if (SDK_INT >= LOLLIPOP) {
         // Use external storage.
-        File(getExternalStorageDirectory(), "app_$directoryName")
+        File(context.getExternalFilesDir(DIRECTORY_PICTURES), "app_$directoryName")
     } else {
         // Use internal storage.
         context.getDir(directoryName, MODE_WORLD_READABLE)
