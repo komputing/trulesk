@@ -79,7 +79,7 @@ private fun doBefore(additionalWork: () -> Unit) {
 
     TestButler.verifyAnimationsDisabled(InstrumentationRegistry.getInstrumentation().targetContext)
 
-    TraceDroid.getStackTraceFiles()?.forEach { it.deleteRecursively() }
+    TraceDroid.stackTraceFiles?.forEach { it.deleteRecursively() }
 
     additionalWork.invoke()
 }
