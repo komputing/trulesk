@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka-android'
 
-def libVersionName = '0.31'
-def libVersionCode = 31
+def libVersionName = '0.40'
+def libVersionCode = 40
 
 version libVersionName
 
