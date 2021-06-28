@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'maven-publish'
 
 def libVersionName = '4.2'
 def libVersionCode = 42
@@ -10,6 +11,17 @@ repositories {
     mavenCentral()
     google()
     maven { url 'https://jitpack.io' }
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            aar(MavenPublication) {
+                artifact bundleReleaseAar
+                artifact sourcesJar
+            }
+        }
+    }
 }
 
 dependencies {
