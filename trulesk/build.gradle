@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.jraska:falcon:2.1.1'
+    implementation 'com.jraska:falcon:2.2.0'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
