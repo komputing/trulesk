@@ -8,8 +8,8 @@ def libVersionCode = 40
 version libVersionName
 
 repositories {
-    jcenter()
-    maven { url 'https://maven.google.com' }
+    mavenCentral()
+    google()
     maven { url 'https://jitpack.io' }
 }
 

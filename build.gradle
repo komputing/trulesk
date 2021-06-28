@@ -7,7 +7,7 @@ buildscript {
     }
 
     repositories {
-        jcenter()
+        gradlePluginPortal()
         google()
     }
 
