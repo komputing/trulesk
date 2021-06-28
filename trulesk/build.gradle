@@ -2,8 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'maven-publish'
 
-def libVersionName = '4.2'
-def libVersionCode = 42
+def libVersionName = '4.3'
+def libVersionCode = 43
 
 version libVersionName
 
