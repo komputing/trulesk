@@ -24,7 +24,7 @@ dependencies {
 
     implementation 'androidx.test.espresso:espresso-intents:3.3.0'
 
-    api 'com.linkedin.testbutler:test-butler-library:2.1.1'
+    api 'com.linkedin.testbutler:test-butler-library:2.2.1'
 }
 
 android {
