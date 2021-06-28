@@ -20,7 +20,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    implementation 'com.github.ligi:tracedroid:4.0'
+    implementation 'com.github.ligi:tracedroid:4.1'
 
     implementation 'androidx.test.espresso:espresso-intents:3.3.0'
 
